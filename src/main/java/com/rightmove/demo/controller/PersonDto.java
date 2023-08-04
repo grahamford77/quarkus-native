@@ -6,13 +6,13 @@ import lombok.Builder;
 @Builder
 public record PersonDto(String firstName, String lastName, String address, String emailAddress, long age) {
 	public Person toPerson(long age) {
-		return Person.builder()
-				.address(this.address())
-				.emailAddress(this.emailAddress())
-				.firstName(this.firstName())
-				.lastName(this.lastName())
-				.age(age)
-				.build();
+		Person person = new Person();
+		person.setFirstName(firstName);
+		person.setLastName(lastName);
+		person.setAddress(address);
+		person.setEmailAddress(emailAddress);
+		person.setAge(age);
+		return person;
 	}
 
 	public static PersonDto fromPerson(Person person) {

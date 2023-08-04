@@ -1,14 +1,18 @@
 package com.rightmove.demo.domain;
 
-import lombok.Builder;
-import lombok.Data;
+import java.io.Serializable;
 
-@Builder
-@Data
-public final class Person {
-	private final String firstName;
-	private final String lastName;
-	private final String address;
-	private final String emailAddress;
-	private final long age;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@Getter
+@Setter
+public final class Person implements Serializable {
+	public String firstName;
+	public String lastName;
+	public String address;
+	public String emailAddress;
+	public long age;
 }

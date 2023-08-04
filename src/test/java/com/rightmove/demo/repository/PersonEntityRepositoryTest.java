@@ -41,26 +41,26 @@ class PersonEntityRepositoryTest {
 	@Test
 	void testStore() throws ExecutionException, InterruptedException {
 		// Given
-		Person personEntity = Person.builder()
-				.lastName("Doe")
-				.address("1 High Street")
-				.firstName("John")
-				.emailAddress("john.doe@example.com")
-				.build();
+		Person person = new Person();
+		person.setFirstName("John");
+		person.setLastName("Doe");
+		person.setAddress("1 High Street");
+		person.setEmailAddress("john.doe@example.com");
+		person.setAge(23);
 
 		String documentId = "abcd1234";
 		when(firestore.collection(PersonRepository.PERSONS_COLLECTION_NAME)).thenReturn(collectionReference);
-		when(collectionReference.add(personEntity)).thenReturn(apiFuture);
+		when(collectionReference.add(person)).thenReturn(apiFuture);
 		when(apiFuture.get()).thenReturn(mock(DocumentReference.class));
 		when(apiFuture.get().getId()).thenReturn(documentId);
 
 		// When
-		String result = personRepository.store(personEntity);
+		String result = personRepository.store(person);
 
 		// Then
 		assertEquals(documentId, result);
 		verify(firestore, times(1)).collection(PersonRepository.PERSONS_COLLECTION_NAME);
-		verify(collectionReference, times(1)).add(personEntity);
+		verify(collectionReference, times(1)).add(person);
 		verify(apiFuture, times(2)).get();
 	}
 }
