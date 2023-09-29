@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import com.rightmove.demo.repository.ObjectNotFoundException;
 import com.rightmove.demo.service.PersonService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -40,6 +41,8 @@ public class PersonResource {
 	}
 
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response storePerson(PersonDto personDto) {
 		try {
 			String id = personService.storePerson(personDto);
